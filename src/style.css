@@ -57,7 +57,7 @@ body {
 #grid-border {
   width: 84%;
   margin-top: 10%;
-  z-index: 4;
+  z-index: 5;
 }
 
 #inventory-icon {
@@ -71,9 +71,8 @@ body {
   position: relative;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 0px; /* adjust as needed */
   width: 80%;
   margin-top: 15%; 
   margin-left: 4%;
-  z-index: 3; /* This should be less than grid-border but greater than grid-background */
+  z-index: 4;
 }
