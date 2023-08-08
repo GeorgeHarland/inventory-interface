@@ -10,7 +10,7 @@ for(let i = 0; i < inventory.length; i++) {
     inventory[i][j] = getRandomItem();
     let itemIcon = getItemIcon(inventory[i][j]);
     cell.appendChild(itemIcon);
-    gridContainer.appendChild(cell);
+    gridContainer && gridContainer.appendChild(cell);
   }
 }
 
@@ -20,7 +20,7 @@ function getRandomItem() {
   return items[randomIndex];
 }
 
-function getItemIcon(item) {
+function getItemIcon(item: string) {
   let imgContainer = document.createElement('div');
   
   let highlight = document.createElement('img');
