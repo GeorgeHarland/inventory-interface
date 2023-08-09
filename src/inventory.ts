@@ -1,6 +1,7 @@
 import InventorySpace from './inventorySpace.js';
 import { ItemsRecord } from './constants.js';
 import { ItemType, ItemData } from "./types"
+import Item from './item.js';
 
 export default class Inventory {
   private inventory: InventorySpace[][] = [];
@@ -31,7 +32,7 @@ export default class Inventory {
     for(let i=0; i < this.rows; i++) {
       for(let j=0; j < this.columns; j++) {
         const randomItem = this.generateItem();
-        this.inventory[i][j].setItem(randomItem);
+        this.inventory[i][j].setItem(randomItem as Item);
       }
     }
   }
@@ -59,7 +60,7 @@ export default class Inventory {
     const halfLength = Math.floor(mixedInventory.length / 2);
     for (let i = 0; i < halfLength; i++) {
       const randomItem = this.generateItem();
-      mixedInventory[i].setItem(randomItem);
+      mixedInventory[i].setItem(randomItem as Item);
     }
   }
 }

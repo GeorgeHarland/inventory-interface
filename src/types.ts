@@ -1,6 +1,6 @@
 export type ItemData = {
   name: string;
-  stackSize: number;
+  maxStackSize: number;
 }
 
 export type ItemType = 'Apple' | 'Book' | 'Flask' | 'Herbs' | 'Sword';

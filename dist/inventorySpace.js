@@ -5,6 +5,7 @@ export default class InventorySpace {
     imgContainer;
     highlight;
     img;
+    stackCount;
     static sourceSpace = null;
     constructor(id, gridElement) {
         this.id = id;
@@ -12,11 +13,13 @@ export default class InventorySpace {
         this.imgContainer = document.createElement('div');
         this.highlight = document.createElement('img');
         this.img = document.createElement('img');
+        this.stackCount = document.createElement('span');
         this.img.addEventListener('dragstart', this.handleDragStart.bind(this));
         this.imgContainer.addEventListener('dragover', this.handleDragOver.bind(this));
         this.imgContainer.addEventListener('drop', this.handleDrop.bind(this));
         this.setupHighlight();
         this.setupImgContainer();
+        this.setupStackCount();
         this.gridElement.appendChild(this.imgContainer);
         this.gridElement.appendChild(this.highlight);
     }
@@ -33,8 +36,6 @@ export default class InventorySpace {
         this.imgContainer.style.display = 'flex';
         this.imgContainer.style.height = '100%';
         this.imgContainer.style.width = '100%';
-        // this.imgContainer.style.marginBottom = '0%';
-        // this.imgContainer.style.marginLeft = '0%';
         this.imgContainer.style.justifyContent = 'center';
         this.imgContainer.style.alignItems = 'center';
         this.imgContainer.style.position = 'relative';
@@ -47,6 +48,15 @@ export default class InventorySpace {
             this.highlight.style.visibility = 'hidden';
         });
     }
+    setupStackCount() {
+        this.stackCount.style.position = 'absolute';
+        this.stackCount.style.top = '7%';
+        this.stackCount.style.left = '7%';
+        this.stackCount.style.zIndex = '5';
+        this.stackCount.style.color = 'black';
+        this.stackCount.style.fontSize = '14';
+        this.imgContainer.appendChild(this.stackCount);
+    }
     setItem(item) {
         this.item = item;
         if (item) {
@@ -55,7 +65,12 @@ export default class InventorySpace {
             this.img.style.width = '50%';
             this.img.style.height = '50%';
             this.img.style.zIndex = '4';
-            // this.img.draggable = true;
+            if (item.currentStackSize > 1) {
+                this.stackCount.textContent = item.currentStackSize.toString();
+            }
+            else {
+                this.stackCount.textContent = '';
+            }
         }
     }
     clearItem() {
