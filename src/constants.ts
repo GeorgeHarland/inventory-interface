@@ -1,3 +1,5 @@
+import { ItemType, ItemData } from "./types"
+
 export const ItemsRecord: Record<ItemType, ItemData> = {
   Apple: { name: 'Apple', stackSize: 10 },
   Book: { name: 'Book', stackSize: 1 },

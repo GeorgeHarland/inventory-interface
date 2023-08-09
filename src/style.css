@@ -14,7 +14,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  /* z-index: 0; */
 }
 
 #inventory {
@@ -25,9 +24,6 @@ body {
   background-position: center;
   width: 45vw;
   height: 100vh;
-  /* width: 45%;
-  height: 45%; */
-  /* z-index: 1; */
   position: relative;
 }
 
@@ -47,17 +43,14 @@ body {
   width: 8%;
   margin-top: -72%;
   filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
-  /* z-index: 2; */
 }
 
 #grid-background {
   width: 82%;
   margin-top: 10%;
-  /* z-index: 2; */
 }
 
 #grid-border {
-  /* position: relative; */
   width: 84%;
   margin-top: 10%;
   z-index: 6;
@@ -66,7 +59,6 @@ body {
 #inventory-icon {
   width: 20%;
   margin-top: -52%;
-  /* z-index: 2; */
 }
 
 #grid-container {
@@ -77,5 +69,20 @@ body {
   width: 80%;
   margin-top: 10%; 
   margin-left: 0%;
-  /* z-index: 4; */
+  overflow: hidden;
+}
+
+.grid-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+}
+
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -1,6 +1,6 @@
-type ItemData = {
+export type ItemData = {
   name: string;
   stackSize: number;
 }
 
-type ItemType = 'Apple' | 'Book' | 'Flask' | 'Herbs' | 'Sword';
+export type ItemType = 'Apple' | 'Book' | 'Flask' | 'Herbs' | 'Sword';
