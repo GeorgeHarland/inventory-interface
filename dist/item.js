@@ -1,8 +1,4 @@
-export default class Item {
-    name;
-    stackable;
-    constructor(name, stackable) {
-        this.name = name;
-        this.stackable = stackable;
-    }
-}
+"use strict";
+// export default class Item {
+//   constructor(public category: ItemType, public stackSize: number = 1) {}
+// }

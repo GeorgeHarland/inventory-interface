@@ -9,10 +9,13 @@
     "module": "es6",
     "target": "es2022",
     "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "*.js"]
+    },
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node16"
+    "forceConsistentCasingInFileNames": true
   }
 }
