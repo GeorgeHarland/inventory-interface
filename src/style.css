@@ -62,8 +62,64 @@ img {
 
 #decor-top {
   width: 8%;
-  margin-top: -72%;
+  margin-bottom: 72%;
   filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+#decor-left {
+  width: 7%;
+  margin-top: 10%;
+  margin-right: 88%;
+  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
+  z-index: 8;
+  transform: rotateY(180deg);
+}
+
+#decor-right {
+  width: 7%;
+  margin-top: 10%;
+  margin-left: 88%;
+  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
+  z-index: 8;
+}
+
+#decor-bot {
+  width: 6%;
+  margin-top: 73%;
+  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
+  z-index: 8;
+  transform: rotate(90deg);
+}
+
+#corner-tl {
+  width: 8%;
+  margin-bottom: 39%;
+  margin-right: 80%;
+  z-index: 8;
+  transform: rotate(90deg);
+}
+
+#corner-tr {
+  width: 8%;
+  margin-bottom: 39%;
+  margin-left: 80%;
+  z-index: 8;
+  transform: rotateX(180deg) rotate(270deg);
+}
+
+#corner-bl {
+  width: 8%;
+  margin-top: 59%;
+  margin-right: 80%;
+  z-index: 8;
+}
+
+#corner-br {
+  width: 8%;
+  margin-top: 59%;
+  margin-left: 80%;
+  z-index: 8;
+  transform: rotateX(180deg) rotate(180deg);
 }
 
 #grid-background {
