@@ -1,34 +1,24 @@
-import { ItemsRecord } from "./constants";
 export default class Item {
-    type;
     currentStackSize;
-    name;
+    title;
+    icon;
+    description;
+    sellPrice;
     maxStackSize;
-    constructor(type, currentStackSize = 1) {
-        this.type = type;
+    constructor(itemData, currentStackSize = 1) {
         this.currentStackSize = currentStackSize;
-        if (!ItemsRecord[type]) {
-            throw new Error("Invalid item type provided");
-        }
-        this.name = ItemsRecord[type].name;
-        this.maxStackSize = ItemsRecord[type].maxStackSize;
+        console.log(currentStackSize);
+        this.title = itemData.title;
+        this.icon = itemData.icon;
+        this.description = itemData.description;
+        this.sellPrice = itemData.sellPrice;
+        this.maxStackSize = itemData.maxStackSize;
     }
-    canStackWith(item) {
-        return this.type === item.type;
-    }
-    stack(item) {
-        if (this.type !== item.type) {
-            throw new Error("Different item types can't be stacked");
-        }
-        const total = this.currentStackSize + item.currentStackSize;
-        if (total <= this.maxStackSize) {
-            this.currentStackSize = total;
-            item.currentStackSize = 0;
-        }
-        else {
-            const overflow = total - this.maxStackSize;
-            this.currentStackSize = this.maxStackSize;
-            item.currentStackSize = overflow;
-        }
+    canStack(item) {
+        if (item.title != this.title)
+            return false;
+        if (item.currentStackSize + this.currentStackSize > this.maxStackSize)
+            return false;
+        return true;
     }
 }

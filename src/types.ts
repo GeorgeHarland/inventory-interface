@@ -1,5 +1,8 @@
 export type ItemData = {
-  name: string;
+  title: string;
+  icon: string;
+  description: string;
+  sellPrice: number;
   maxStackSize: number;
 }
 

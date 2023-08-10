@@ -1,36 +1,45 @@
-import { ItemsRecord } from "./constants";
-import { ItemType } from "./types";
+import { ItemData } from "./types";
 
 export default class Item {
-  name: string;
+  title: string;
+  icon: string;
+  description: string;
+  sellPrice: number;
   maxStackSize: number;
 
-  constructor(public type: ItemType, public currentStackSize: number = 1) {
-      if (!ItemsRecord[type as ItemType]) {
-          throw new Error("Invalid item type provided");
-      }
-      this.name = ItemsRecord[type].name;
-      this.maxStackSize = ItemsRecord[type].maxStackSize;
+  constructor(itemData: ItemData, public currentStackSize: number = 1) {
+    console.log(currentStackSize);
+    this.title = itemData.title;
+    this.icon = itemData.icon;
+    this.description = itemData.description;
+    this.sellPrice = itemData.sellPrice;
+    this.maxStackSize = itemData.maxStackSize;
   }
 
-  canStackWith(item: Item): boolean {
-      return this.type === item.type
+  canStack(item: Item): boolean {
+    if(item.title != this.title) return false;
+    if(item.currentStackSize + this.currentStackSize > this.maxStackSize) return false;
+    return true;
   }
 
-  stack(item: Item): void {
-      if (this.type !== item.type) {
-          throw new Error("Different item types can't be stacked");
-      }
+//   canStackWith(item: Item): boolean {
+//       return this.type === item.type
+//   }
 
-      const total = this.currentStackSize + item.currentStackSize;
+//   stack(item: Item): void {
+//       if (this.type !== item.type) {
+//           throw new Error("Different item types can't be stacked");
+//       }
 
-      if (total <= this.maxStackSize) {
-          this.currentStackSize = total;
-          item.currentStackSize = 0;
-      } else {
-          const overflow = total - this.maxStackSize;
-          this.currentStackSize = this.maxStackSize;
-          item.currentStackSize = overflow;
-      }
-  }
+//       const total = this.currentStackSize + item.currentStackSize;
+
+//       if (total <= this.maxStackSize) {
+//           this.currentStackSize = total;
+//           item.currentStackSize = 0;
+//       } else {
+//           const overflow = total - this.maxStackSize;
+//           this.currentStackSize = this.maxStackSize;
+//           item.currentStackSize = overflow;
+//       }
+//   }
 }

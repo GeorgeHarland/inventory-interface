@@ -43,9 +43,11 @@ export default class Inventory {
     }
   }
 
-  private generateItem(): ItemData {
+  private generateItem(): Item {
     const keys = Object.keys(ItemsRecord) as ItemType[];
     const randomIndex = Math.floor(Math.random() * keys.length);
-    return ItemsRecord[keys[randomIndex]];
+    const randomItem = ItemsRecord[keys[randomIndex]];
+    const randomStackSize = Math.floor(Math.random() * randomItem.maxStackSize) + 1;
+    return new Item(randomItem, randomStackSize);
   }
 }

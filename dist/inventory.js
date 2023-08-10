@@ -1,5 +1,6 @@
 import InventorySpace from './inventorySpace.js';
 import { DEV_POPULATE_HALF_INVENTORY, ItemsRecord } from './constants.js';
+import Item from './item.js';
 export default class Inventory {
     rows;
     columns;
@@ -45,6 +46,8 @@ export default class Inventory {
     generateItem() {
         const keys = Object.keys(ItemsRecord);
         const randomIndex = Math.floor(Math.random() * keys.length);
-        return ItemsRecord[keys[randomIndex]];
+        const randomItem = ItemsRecord[keys[randomIndex]];
+        const randomStackSize = Math.floor(Math.random() * randomItem.maxStackSize) + 1;
+        return new Item(randomItem, randomStackSize);
     }
 }

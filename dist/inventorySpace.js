@@ -50,18 +50,19 @@ export default class InventorySpace {
     }
     setupStackCount() {
         this.stackCount.style.position = 'absolute';
-        this.stackCount.style.top = '7%';
-        this.stackCount.style.left = '7%';
+        this.stackCount.style.top = '9%';
+        this.stackCount.style.left = '10%';
         this.stackCount.style.zIndex = '5';
-        this.stackCount.style.color = 'black';
-        this.stackCount.style.fontSize = '14';
+        this.stackCount.style.color = 'brown';
+        this.stackCount.style.fontSize = '12px';
+        this.stackCount.style.fontFamily = 'NumericsFont';
         this.imgContainer.appendChild(this.stackCount);
     }
     setItem(item) {
         this.item = item;
         if (item) {
-            this.img.src = `./assets/Images/Icons/${item.name}.png`;
-            this.img.alt = item.name;
+            this.img.src = `./assets/Images/Icons/${item.icon}.png`;
+            this.img.alt = item.icon;
             this.img.style.width = '50%';
             this.img.style.height = '50%';
             this.img.style.zIndex = '4';
@@ -79,6 +80,7 @@ export default class InventorySpace {
         this.img.alt = '';
         this.img.style.width = '0%';
         this.img.style.height = '0%';
+        this.stackCount.textContent = '';
     }
     handleDragStart(e) {
         InventorySpace.sourceSpace = this;
@@ -89,11 +91,29 @@ export default class InventorySpace {
     }
     handleDrop(e) {
         e.preventDefault();
-        if (InventorySpace.sourceSpace) {
-            const tempItem = this.item;
-            this.setItem(InventorySpace.sourceSpace.item);
-            InventorySpace.sourceSpace.setItem(tempItem);
-            if (!tempItem) {
+        if (InventorySpace.sourceSpace && InventorySpace.sourceSpace.item) {
+            if (this.item) {
+                // stack if can
+                if (this.item.canStack(InventorySpace.sourceSpace.item)) {
+                    this.item.currentStackSize += InventorySpace.sourceSpace.item.currentStackSize;
+                    if (this.item.currentStackSize > 1) {
+                        this.stackCount.textContent = this.item.currentStackSize.toString();
+                    }
+                    else {
+                        this.stackCount.textContent = '';
+                    }
+                    InventorySpace.sourceSpace.clearItem();
+                    // swap the items
+                }
+                else {
+                    const tempItem = this.item;
+                    this.setItem(InventorySpace.sourceSpace.item);
+                    InventorySpace.sourceSpace.setItem(tempItem);
+                }
+                // move item to empty space
+            }
+            else {
+                this.setItem(InventorySpace.sourceSpace.item);
                 InventorySpace.sourceSpace.clearItem();
             }
             InventorySpace.sourceSpace = null;

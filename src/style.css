@@ -6,6 +6,19 @@ body {
   padding: 0;
 }
 
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@font-face {
+  font-family: 'NumericsFont';
+  src: url('/assets/Fonts/NumericsFont.otf') format('opentype');
+}
+
 #background {
   background-image: url('./assets/Images/Background/UI_Background.png');
   position: fixed;
@@ -77,12 +90,4 @@ body {
   justify-content: center;
   align-items: center;
   aspect-ratio: 1 / 1;
-}
-
-img {
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
