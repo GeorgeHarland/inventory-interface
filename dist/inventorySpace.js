@@ -6,6 +6,11 @@ export default class InventorySpace {
     highlight;
     img;
     stackCount;
+    tooltip;
+    tooltipTitle;
+    tooltipDescription;
+    tooltipPrice;
+    tooltipContainer;
     static sourceSpace = null;
     constructor(id, gridElement) {
         this.id = id;
@@ -14,9 +19,19 @@ export default class InventorySpace {
         this.highlight = document.createElement('img');
         this.img = document.createElement('img');
         this.stackCount = document.createElement('span');
-        this.img.addEventListener('dragstart', this.handleDragStart.bind(this));
+        this.tooltipContainer = document.createElement('div');
+        this.tooltip = document.createElement('img');
+        this.tooltipTitle = document.createElement('p');
+        this.tooltipDescription = document.createElement('p');
+        this.tooltipPrice = document.createElement('p');
+        this.imgContainer.draggable = true;
+        this.imgContainer.addEventListener('dragstart', this.handleDragStart.bind(this));
         this.imgContainer.addEventListener('dragover', this.handleDragOver.bind(this));
         this.imgContainer.addEventListener('drop', this.handleDrop.bind(this));
+        this.imgContainer.addEventListener('mouseenter', this.showTooltip.bind(this));
+        this.imgContainer.addEventListener('mouseleave', this.hideTooltip.bind(this));
+        this.imgContainer.addEventListener('mousemove', this.moveTooltip.bind(this));
+        this.setupTooltip();
         this.setupHighlight();
         this.setupImgContainer();
         this.setupStackCount();
@@ -58,6 +73,37 @@ export default class InventorySpace {
         this.stackCount.style.fontFamily = 'NumericsFont';
         this.imgContainer.appendChild(this.stackCount);
     }
+    setupTooltip() {
+        this.tooltipContainer.style.position = 'absolute';
+        this.tooltipContainer.style.zIndex = '9999';
+        this.tooltipContainer.style.visibility = 'hidden';
+        this.tooltipContainer.style.pointerEvents = 'none';
+        this.tooltip.src = `./assets/Images/Tooltip/IMG_TooltipPanel.png`;
+        this.tooltipTitle.style.position = 'absolute';
+        this.tooltipTitle.style.color = 'brown';
+        this.tooltipTitle.style.top = '6%';
+        this.tooltipTitle.style.left = '14%';
+        this.tooltipTitle.style.fontSize = '18px';
+        this.tooltipTitle.style.fontFamily = 'MenusPrimaryFont';
+        this.tooltipDescription.style.position = 'absolute';
+        this.tooltipDescription.style.color = 'brown';
+        this.tooltipDescription.style.top = '35%';
+        this.tooltipDescription.style.left = '14%';
+        this.tooltipDescription.style.fontSize = '12px';
+        this.tooltipDescription.style.fontFamily = 'ToolTipDescription';
+        this.tooltipDescription.style.fontStyle = 'italic';
+        this.tooltipPrice.style.position = 'absolute';
+        this.tooltipPrice.style.color = 'brown';
+        this.tooltipPrice.style.bottom = '6%';
+        this.tooltipPrice.style.right = '6%';
+        this.tooltipPrice.style.fontSize = '12px';
+        this.tooltipPrice.style.fontFamily = 'ToolTipDescription';
+        this.tooltipContainer.appendChild(this.tooltip);
+        this.tooltipContainer.appendChild(this.tooltipTitle);
+        this.tooltipContainer.appendChild(this.tooltipDescription);
+        this.tooltipContainer.appendChild(this.tooltipPrice);
+        document.body.appendChild(this.tooltipContainer);
+    }
     setItem(item) {
         this.item = item;
         if (item) {
@@ -84,13 +130,14 @@ export default class InventorySpace {
     }
     handleDragStart(e) {
         InventorySpace.sourceSpace = this;
-        e.dataTransfer.setData('text/plain', this.id);
+        this.tooltipContainer.style.visibility = 'hidden';
     }
     handleDragOver(e) {
         e.preventDefault();
     }
     handleDrop(e) {
         e.preventDefault();
+        this.tooltipContainer.style.visibility = 'visible';
         if (InventorySpace.sourceSpace && InventorySpace.sourceSpace.item) {
             if (this.item) {
                 // stack if can
@@ -118,5 +165,20 @@ export default class InventorySpace {
             }
             InventorySpace.sourceSpace = null;
         }
+    }
+    showTooltip() {
+        if (this.item) {
+            this.tooltipTitle.textContent = this.item.title;
+            this.tooltipDescription.textContent = this.item.description;
+            this.tooltipPrice.textContent = this.item.sellPrice.toString() + 'g';
+            this.tooltipContainer.style.visibility = 'visible';
+        }
+    }
+    hideTooltip() {
+        this.tooltipContainer.style.visibility = 'hidden';
+    }
+    moveTooltip(e) {
+        this.tooltipContainer.style.left = `${e.pageX}px`;
+        this.tooltipContainer.style.top = `${e.pageY}px`;
     }
 }
