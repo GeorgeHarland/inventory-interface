@@ -20,3 +20,6 @@ You can change DEV_POPULATE_HALF_INVENTORY in ./dist/constants.js to true to pop
 - When moving an item stack onto another, I would like the latter stack to be filled to its max capacity, then the remainder go back to the initial stack. Currently it just swaps the stacks if their total is above the max capacity.
 
 ## Images
+
+![image](https://github.com/GeorgeHarland/inventory-interface/assets/37070520/4d771f9c-b3da-467a-bc43-fef72b09be89)
+
