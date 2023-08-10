@@ -1,5 +1,5 @@
 import InventorySpace from './inventorySpace.js';
-import { ItemsRecord } from './constants.js';
+import { DEV_POPULATE_HALF_INVENTORY, ItemsRecord } from './constants.js';
 export default class Inventory {
     rows;
     columns;
@@ -10,8 +10,7 @@ export default class Inventory {
         this.columns = columns;
         this.gridContainer = gridContainer;
         this.setupGrid();
-        // this.populateAll();
-        this.populateHalf();
+        this.populateInventory();
     }
     setupGrid() {
         for (let i = 0; i < this.rows; i++) {
@@ -27,11 +26,19 @@ export default class Inventory {
             this.inventory.push(row);
         }
     }
-    populateAll() {
+    populateInventory() {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.columns; j++) {
-                const randomItem = this.generateItem();
-                this.inventory[i][j].setItem(randomItem);
+                if (DEV_POPULATE_HALF_INVENTORY) {
+                    if (Math.random() < 0.5) {
+                        const randomItem = this.generateItem();
+                        this.inventory[i][j].setItem(randomItem);
+                    }
+                }
+                else {
+                    const randomItem = this.generateItem();
+                    this.inventory[i][j].setItem(randomItem);
+                }
             }
         }
     }
@@ -39,24 +46,5 @@ export default class Inventory {
         const keys = Object.keys(ItemsRecord);
         const randomIndex = Math.floor(Math.random() * keys.length);
         return ItemsRecord[keys[randomIndex]];
-    }
-    shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-    populateHalf() {
-        const mixedInventory = this.inventory.reduce((acc, curr) => acc.concat(curr), []);
-        for (let i = mixedInventory.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [mixedInventory[i], mixedInventory[j]] = [mixedInventory[j], mixedInventory[i]];
-        }
-        const halfLength = Math.floor(mixedInventory.length / 2);
-        for (let i = 0; i < halfLength; i++) {
-            const randomItem = this.generateItem();
-            mixedInventory[i].setItem(randomItem);
-        }
     }
 }

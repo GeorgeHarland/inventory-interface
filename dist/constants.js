@@ -5,3 +5,4 @@ export const ItemsRecord = {
     Herbs: { name: 'Herbs', maxStackSize: 10 },
     Sword: { name: 'Sword', maxStackSize: 1 },
 };
+export const DEV_POPULATE_HALF_INVENTORY = false;

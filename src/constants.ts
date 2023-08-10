@@ -7,3 +7,5 @@ export const ItemsRecord: Record<ItemType, ItemData> = {
   Herbs: { name: 'Herbs', maxStackSize: 10 },
   Sword: { name: 'Sword', maxStackSize: 1 },
 }
+
+export const DEV_POPULATE_HALF_INVENTORY = false;
