@@ -21,25 +21,4 @@ export default class Item {
     if(item.currentStackSize + this.currentStackSize > this.maxStackSize) return false;
     return true;
   }
-
-//   canStackWith(item: Item): boolean {
-//       return this.type === item.type
-//   }
-
-//   stack(item: Item): void {
-//       if (this.type !== item.type) {
-//           throw new Error("Different item types can't be stacked");
-//       }
-
-//       const total = this.currentStackSize + item.currentStackSize;
-
-//       if (total <= this.maxStackSize) {
-//           this.currentStackSize = total;
-//           item.currentStackSize = 0;
-//       } else {
-//           const overflow = total - this.maxStackSize;
-//           this.currentStackSize = this.maxStackSize;
-//           item.currentStackSize = overflow;
-//       }
-//   }
 }
