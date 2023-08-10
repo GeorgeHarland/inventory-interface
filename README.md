@@ -9,6 +9,7 @@ To run:
 - 'npm i' to install express
 - 'npm start' to run the server
   issue with side screens (can see going past 1050x400), new image example
+- go to http://localhost:3000
 
 ## Testing
 
