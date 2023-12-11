@@ -16,7 +16,7 @@ You can change DEV_POPULATE_HALF_INVENTORY in ./dist/constants.js to true to pop
 
 ## Known Issues
 
-- If the screen is made super wide, the UI breaks. This starts around 1050x400.
+- If the screen is made super wide, the UI breaks.
 - When moving an item stack onto another, I would like the latter stack to be filled to its max capacity, then the remainder go back to the initial stack. Currently it just swaps the stacks if their total is above the max capacity.
 
 ## Images
